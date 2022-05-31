@@ -1,18 +1,13 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
+import br.edu.utfpr.dv.sireata.interfaces.IDAOCampus;
+import br.edu.utfpr.dv.sireata.model.Campus;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.utfpr.dv.sireata.model.Campus;
-
-public class CampusDAO {
-	
+public class CampusDAO implements IDAOCampus {
 	public Campus buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -162,7 +157,6 @@ public class CampusDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Campus campus) throws SQLException{
 		boolean insert = (campus.getIdCampus() == 0);
 		Connection conn = null;

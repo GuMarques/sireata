@@ -1,17 +1,13 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import br.edu.utfpr.dv.sireata.interfaces.IDAOUsuario;
+import br.edu.utfpr.dv.sireata.model.Usuario;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.utfpr.dv.sireata.model.Usuario;
-
-public class UsuarioDAO {
-	
+public class UsuarioDAO implements IDAOUsuario {
 	public Usuario buscarPorLogin(String login) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -39,7 +35,6 @@ public class UsuarioDAO {
 				conn.close();
 		}
 	}
-	
 	public Usuario buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -158,7 +153,6 @@ public class UsuarioDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Usuario usuario) throws SQLException{
 		boolean insert = (usuario.getIdUsuario() == 0);
 		Connection conn = null;

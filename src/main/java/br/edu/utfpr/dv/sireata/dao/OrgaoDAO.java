@@ -1,19 +1,15 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import br.edu.utfpr.dv.sireata.interfaces.IDAOOrgao;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.OrgaoMembro;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 
-public class OrgaoDAO {
-	
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrgaoDAO implements IDAOOrgao {
 	public Orgao buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -304,7 +300,6 @@ public class OrgaoDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Orgao orgao) throws SQLException{
 		boolean insert = (orgao.getIdOrgao() == 0);
 		Connection conn = null;

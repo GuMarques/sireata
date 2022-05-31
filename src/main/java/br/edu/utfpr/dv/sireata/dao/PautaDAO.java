@@ -1,17 +1,13 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import br.edu.utfpr.dv.sireata.interfaces.IDAOPauta;
+import br.edu.utfpr.dv.sireata.model.Pauta;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.utfpr.dv.sireata.model.Pauta;
-
-public class PautaDAO {
-	
+public class PautaDAO implements IDAOPauta {
 	public Pauta buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -67,7 +63,6 @@ public class PautaDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Pauta pauta) throws SQLException{
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;

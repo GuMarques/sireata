@@ -1,17 +1,13 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import br.edu.utfpr.dv.sireata.interfaces.IDAOAnexo;
+import br.edu.utfpr.dv.sireata.model.Anexo;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.utfpr.dv.sireata.model.Anexo;
-
-public class AnexoDAO {
-	
+public class AnexoDAO implements IDAOAnexo {
 	public Anexo buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -40,7 +36,6 @@ public class AnexoDAO {
 				conn.close();
 		}
 	}
-	
 	public List<Anexo> listarPorAta(int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
@@ -69,7 +64,6 @@ public class AnexoDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Anexo anexo) throws SQLException{
 		boolean insert = (anexo.getIdAnexo() == 0);
 		Connection conn = null;

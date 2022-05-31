@@ -1,18 +1,14 @@
 package br.edu.utfpr.dv.sireata.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import br.edu.utfpr.dv.sireata.interfaces.IDAOComentario;
 import br.edu.utfpr.dv.sireata.model.Comentario;
 import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
 
-public class ComentarioDAO {
-	
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ComentarioDAO implements IDAOComentario {
 	public Comentario buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -98,7 +94,6 @@ public class ComentarioDAO {
 				conn.close();
 		}
 	}
-	
 	public int salvar(Comentario comentario) throws SQLException{
 		boolean insert = (comentario.getIdComentario() == 0);
 		Connection conn = null;
