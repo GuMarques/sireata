@@ -1,17 +1,18 @@
 package br.edu.utfpr.dv.sireata.bo;
 
+import br.edu.utfpr.dv.sireata.dao.FabricaDAO;
+import br.edu.utfpr.dv.sireata.interfaces.IDAOAnexo;
+import br.edu.utfpr.dv.sireata.model.Anexo;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import br.edu.utfpr.dv.sireata.dao.AnexoDAO;
-import br.edu.utfpr.dv.sireata.model.Anexo;
 
 public class AnexoBO {
 
 	public Anexo buscarPorId(int id) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
+			IDAOAnexo dao = (IDAOAnexo) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			
 			return dao.buscarPorId(id);
 		}catch(Exception e){
@@ -23,8 +24,7 @@ public class AnexoBO {
 	
 	public List<Anexo> listarPorAta(int idAta) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
-			
+			IDAOAnexo dao = (IDAOAnexo) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorAta(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -49,8 +49,8 @@ public class AnexoBO {
 			}
 			
 			this.validarDados(anexo);
-			
-			AnexoDAO dao = new AnexoDAO();
+
+			IDAOAnexo dao = (IDAOAnexo) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			
 			return dao.salvar(anexo);
 		}catch(Exception e){
@@ -66,7 +66,7 @@ public class AnexoBO {
 	
 	public void excluir(int id) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
+			IDAOAnexo dao = (IDAOAnexo) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			
 			dao.excluir(id);
 		}catch(Exception e){

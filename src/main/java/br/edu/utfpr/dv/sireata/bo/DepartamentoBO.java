@@ -1,18 +1,19 @@
 package br.edu.utfpr.dv.sireata.bo;
 
+import br.edu.utfpr.dv.sireata.dao.FabricaDAO;
+import br.edu.utfpr.dv.sireata.interfaces.IDAODepartamento;
+import br.edu.utfpr.dv.sireata.model.Departamento;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import br.edu.utfpr.dv.sireata.dao.DepartamentoDAO;
-import br.edu.utfpr.dv.sireata.model.Departamento;
 
 public class DepartamentoBO {
 	
 	public Departamento buscarPorId(int id) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
+
 			return dao.buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -23,8 +24,7 @@ public class DepartamentoBO {
 	
 	public Departamento buscarPorOrgao(int idOrgao) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.buscarPorOrgao(idOrgao);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -35,8 +35,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarTodos(boolean apenasAtivos) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.listarTodos(apenasAtivos);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -47,8 +46,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarPorCampus(int idCampus, boolean apenasAtivos) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.listarPorCampus(idCampus, apenasAtivos);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -59,8 +57,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarParaCriacaoAta(int idCampus, int idUsuario) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.listarParaCriacaoAta(idCampus, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -71,8 +68,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarParaConsultaAtas(int idCampus, int idUsuario) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.listarParaConsultaAtas(idCampus, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -90,8 +86,7 @@ public class DepartamentoBO {
 		}
 		
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
+			IDAODepartamento dao = (IDAODepartamento) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
 			return dao.salvar(departamento);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);

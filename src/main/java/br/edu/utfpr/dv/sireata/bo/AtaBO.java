@@ -1,5 +1,15 @@
 package br.edu.utfpr.dv.sireata.bo;
 
+import br.edu.utfpr.dv.sireata.dao.FabricaDAO;
+import br.edu.utfpr.dv.sireata.interfaces.*;
+import br.edu.utfpr.dv.sireata.model.*;
+import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
+import br.edu.utfpr.dv.sireata.util.DateUtils;
+import br.edu.utfpr.dv.sireata.util.ReportUtils;
+import br.edu.utfpr.dv.sireata.util.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
@@ -9,31 +19,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.pdfbox.multipdf.PDFMergerUtility;
-
-import br.edu.utfpr.dv.sireata.dao.AnexoDAO;
-import br.edu.utfpr.dv.sireata.dao.AtaDAO;
-import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
-import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
-import br.edu.utfpr.dv.sireata.dao.PautaDAO;
-import br.edu.utfpr.dv.sireata.model.Anexo;
-import br.edu.utfpr.dv.sireata.model.Ata;
-import br.edu.utfpr.dv.sireata.model.Pauta;
-import br.edu.utfpr.dv.sireata.util.DateUtils;
-import br.edu.utfpr.dv.sireata.util.ReportUtils;
-import br.edu.utfpr.dv.sireata.util.StringUtils;
-import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
-import br.edu.utfpr.dv.sireata.model.AtaParticipante;
-import br.edu.utfpr.dv.sireata.model.AtaReport;
-import br.edu.utfpr.dv.sireata.model.Orgao;
-import br.edu.utfpr.dv.sireata.model.ParticipanteReport;
-
 public class AtaBO {
 	
 	public Ata buscarPorId(int id) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			
 			return dao.buscarPorId(id);
 		}catch(Exception e){
@@ -45,8 +35,7 @@ public class AtaBO {
 	
 	public Ata buscarPorNumero(int idOrgao, TipoAta tipo, int numero, int ano) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.buscarPorNumero(idOrgao, tipo, numero, ano);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -57,8 +46,7 @@ public class AtaBO {
 	
 	public Ata buscarPorPauta(int idPauta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.buscarPorPauta(idPauta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -69,8 +57,7 @@ public class AtaBO {
 	
 	public int buscarProximoNumeroAta(int idOrgao, int ano, TipoAta tipo) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.buscarProximoNumeroAta(idOrgao, ano, tipo);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -81,8 +68,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPublicadas() throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPublicadas();
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -93,8 +79,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorOrgao(int idOrgao) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorOrgao(idOrgao);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -105,8 +90,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorDepartamento(int idDepartamento) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorDepartamento(idDepartamento);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -117,8 +101,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorCampus(int idCampus) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorCampus(idCampus);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -129,8 +112,7 @@ public class AtaBO {
 	
 	public List<Ata> listarNaoPublicadas(int idUsuario) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarNaoPublicadas(idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -141,8 +123,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorOrgao(int idOrgao, int idUsuario) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorOrgao(idOrgao, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -153,8 +134,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorDepartamento(int idDepartamento, int idUsuario) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorDepartamento(idDepartamento, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -165,8 +145,7 @@ public class AtaBO {
 	
 	public List<Ata> listarPorCampus(int idCampus, int idUsuario) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.listarPorCampus(idCampus, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -201,16 +180,15 @@ public class AtaBO {
 	
 	public int salvar(Ata ata) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			int id = dao.salvar(ata);
 			
 			if(ata.getPauta() != null){
 				int i = 1;
 				
 				for(Pauta p : ata.getPauta()){
-					PautaDAO pdao = new PautaDAO();
-					
+					IDAOPauta pdao = (IDAOPauta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
+
 					p.getAta().setIdAta(id);
 					p.setOrdem(i);
 					pdao.salvar(p);
@@ -220,8 +198,8 @@ public class AtaBO {
 			
 			if(ata.getParticipantes() != null){
 				for(AtaParticipante p : ata.getParticipantes()){
-					AtaParticipanteDAO pdao = new AtaParticipanteDAO();
-					
+					IDAOAtaParticipante pdao = (IDAOAtaParticipante) FabricaDAO.createDAO(FabricaDAO.AtaParticipanteDao);
+
 					p.getAta().setIdAta(id);
 					pdao.salvar(p);
 				}
@@ -231,8 +209,8 @@ public class AtaBO {
 				int i = 1;
 				
 				for(Anexo a : ata.getAnexos()) {
-					AnexoDAO adao = new AnexoDAO();
-					
+					IDAOAnexo adao = (IDAOAnexo) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
+
 					a.getAta().setIdAta(id);
 					a.setOrdem(i);
 					adao.salvar(a);
@@ -254,8 +232,7 @@ public class AtaBO {
 	
 	public boolean temComentarios(int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.temComentarios(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -266,8 +243,7 @@ public class AtaBO {
 	
 	public boolean isPresidenteOuSecretario(int idUsuario, int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.isPresidenteOuSecretario(idUsuario, idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -278,8 +254,7 @@ public class AtaBO {
 	
 	public boolean isPresidente(int idUsuario, int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.isPresidente(idUsuario, idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -290,8 +265,7 @@ public class AtaBO {
 	
 	public boolean isPublicada(int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			return dao.isPublicada(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -306,8 +280,7 @@ public class AtaBO {
 	
 	public void liberarComentarios(int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			dao.liberarComentarios(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -322,8 +295,7 @@ public class AtaBO {
 	
 	public void bloquearComentarios(int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
-			
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			dao.bloquearComentarios(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
@@ -382,7 +354,7 @@ public class AtaBO {
 			ata.setParticipantes(apbo.listarPorAta(idAta));
 			
 			for(AtaParticipante participante : ata.getParticipantes()){
-				OrgaoDAO odao = new OrgaoDAO();
+				IDAOOrgao odao = (IDAOOrgao) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 				ParticipanteReport pr = new ParticipanteReport();
 				
 				pr.setNome(participante.getParticipante().getNome() + (participante.getDesignacao().isEmpty() ? "" : " (" + participante.getDesignacao() + ")"));
@@ -426,7 +398,7 @@ public class AtaBO {
 			list.add(report);
 			
 			ByteArrayOutputStream pdf = new ReportUtils().createPdfStream(list, "Ata");
-			
+
 			AnexoBO bo = new AnexoBO();
 			List<Anexo> anexos = bo.listarPorAta(idAta);
 			
@@ -460,7 +432,7 @@ public class AtaBO {
 	
 	public void publicar(int idAta) throws Exception{
 		try{
-			AtaDAO dao = new AtaDAO();
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			byte[] pdf = this.gerarAta(idAta);
 			
 			dao.publicar(idAta, pdf);
@@ -479,8 +451,8 @@ public class AtaBO {
 			if(this.isPublicada(idAta)){
 				throw new Exception("A ata já foi publicada e não pode ser excluída.");
 			}
-			
-			AtaDAO dao = new AtaDAO();
+
+			IDAOAta dao = (IDAOAta) FabricaDAO.createDAO(FabricaDAO.AnexoDao);
 			
 			return dao.excluir(idAta);
 		}catch(Exception e){
